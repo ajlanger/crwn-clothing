@@ -10,10 +10,15 @@ import {
   selectCartTotal,
 } from "../../redux/cart/cart.selectors";
 
+import {
+  selectCurrentUser
+} from '../../redux/user/user.selectors';
+
 import "./checkout.styles.scss";
 
-const CheckOutPage = ({ cartItems, total }) => (
+const CheckOutPage = ({ cartItems, total, currentUser }) => (
   <div className="checkout-page">
+    <h1>{currentUser ? `${currentUser.displayName}'s items` : null}</h1>
     <div className="checkout-header">
       <div className="header-block">
         <span>Product</span>
@@ -51,6 +56,7 @@ const CheckOutPage = ({ cartItems, total }) => (
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,
+  currentUser: selectCurrentUser
 });
 
 export default connect(mapStateToProps)(CheckOutPage);
